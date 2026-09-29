@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Washboard Drag</title>
+<meta name="description" content="A welded steel driveway drag that carries 600 lb of logs or stone to cut washboard out of gravel. 3D model, cut list, order list, and build notes.">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>Washboard Drag</h1>
+    <p class="lede">A 900 lb towed box drag that shears washboard ridges off a gravel driveway and drops the material back into the troughs. Welded from one size of angle iron, weighted with whatever is lying around.</p>
+    <nav>
+      <a href="#model">Model</a><a href="#how">How it works</a><a href="#drawings">Drawings</a><a href="#cutlist">Cut list</a><a href="#order">Order list</a><a href="#build">Build</a><a href="#use">Use</a><a href="#engineering">Engineering</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="errors" class="banner" hidden></div>
+
+  <section id="model">
+    <div class="viewer-wrap">
+      <div id="viewer" class="viewer" aria-label="3D model of the drag. Drag to rotate, right-drag to pan, scroll to zoom."></div>
+      <aside class="panel">
+        <label>Width
+          <select id="width">
+            <option value="48">48 in</option>
+            <option value="60" selected>60 in</option>
+            <option value="72">72 in</option>
+          </select>
+        </label>
+        <label>Exploded <input id="explode" type="range" min="0" max="1" step="0.01" value="0"></label>
+        <label>Build step <input id="step" type="range" min="1" max="6" step="1" value="6"><span id="step-label"></span></label>
+        <label>Ballast
+          <select id="ballast">
+            <option value="none">none</option>
+            <option value="logs">logs</option>
+            <option value="blocks">concrete blocks</option>
+          </select>
+        </label>
+        <label>Deck opacity <input id="deck-opacity" type="range" min="0" max="1" step="0.05" value="0.65"></label>
+        <label><input id="dims" type="checkbox" checked> dimensions</label>
+        <label><input id="ortho" type="checkbox"> orthographic</label>
+        <div class="views">
+          <button data-view="iso">iso</button><button data-view="top">top</button><button data-view="front">front</button><button data-view="side">side</button><button data-view="rear">rear</button>
+        </div>
+        <p class="hint">Drag to rotate. Right-drag or two fingers to pan. Wheel or pinch to zoom. Hover a part for its cut; click to find it in the cut list.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <div class="cols">
+      <div>
+        <p>Washboard is a series of ridges across the road, usually 12 to 30 inches apart and an inch or two tall. Anything short and light bounces from crest to crest and makes it worse. This drag is long enough to bridge several ridges and heavy enough to stay on the ground.</p>
+        <ul>
+          <li><strong>Skids.</strong> The two side rails are 48" of angle iron sitting on the ground. They ride on the ridge crests and set the cutting depth, the way a land plane does.</li>
+          <li><strong>Cutters.</strong> Two blades of angle iron carry a 3/8" x 2" wear bar that projects 5/8" below the skids. That bar shears the top off every ridge. When it wears down you grind it off and weld on a new one.</li>
+          <li><strong>Boxes.</strong> The space between the blades fills with loose gravel and carries it forward. Where a trough passes under, material drops out and fills it, like a box blade.</li>
+          <li><strong>Float.</strong> The rear blade is turned over so its flat leg trails on the ground and screeds the surface smooth.</li>
+          <li><strong>Weight.</strong> A 3/16" deck plate with a 4" lip holds 600 lb or more of logs, concrete blocks, or gravel. Strap logs down through the holes in the lip.</li>
+          <li><strong>Tow.</strong> A chain bridle from the two front lugs to a shackle mount in the receiver. Chain, not a rigid tongue, so the drag follows the ground and a caught rock does not hammer the truck. Rear lugs let you pull it float-first for a finishing pass.</li>
+        </ul>
+      </div>
+      <div id="weights"></div>
+    </div>
+  </section>
+
+  <section id="drawings">
+    <h2>Drawings</h2>
+    <div id="drawings-out" class="drawings"></div>
+  </section>
+
+  <section id="cutlist">
+    <h2>Cut list</h2>
+    <div id="cutlist-out"></div>
+  </section>
+
+  <section id="order">
+    <h2>Order list</h2>
+    <div id="order-out"></div>
+  </section>
+
+  <section id="build">
+    <h2>Build sequence</h2>
+    <div class="cols">
+      <div>
+        <div id="steps-out"></div>
+        <p>Use the build-step slider on the model to see what each step adds.</p>
+      </div>
+      <div>
+        <h3>Welding notes</h3>
+        <ul>
+          <li>Set the rails on a flat slab, tack the three blades between them, then check diagonals. Equal within 1/8" before you weld anything out.</li>
+          <li>Blade ends: fillet both sides of the L, about 12" of weld per end. The 1/16" gap each end is on purpose so the fillet bridges it.</li>
+          <li>Wear bars: 3/16" fillet, 2" stitches on 6" centers, both sides. Stitch so you can grind them off later.</li>
+          <li>Deck: tack the corners, stitch 1" every 6" around the perimeter, then flip the drag and fillet the blade legs from underneath. Alternate sides to keep it flat. The plate weighs 150 lb; two people or a hoist.</li>
+          <li>Lip: 1" stitches on 4" centers both sides. The side lips also weld to the rail leg edge through the deck corner.</li>
+          <li>Lugs last, continuous 1/4" fillet all around, then the gussets. This joint carries the whole towing load.</li>
+          <li>A 220 V MIG with .035 wire or 1/8" 7018 stick handles 1/4" and 3/8" steel. A 110 V MIG will not reliably fuse the lugs; bevel and multipass with flux-core if that is all you have.</li>
+          <li>Degrease, prime, and paint. Store it on two 2x4 skids.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="use">
+    <h2>Towing and use</h2>
+    <div class="cols">
+      <div>
+        <ul>
+          <li>Tow from a shackle mount in the 2" receiver. Never from the ball, the bumper, or a safety-chain loop.</li>
+          <li>Walking pace, 3 to 5 mph. Faster does not cut better, it just bounces 900 lb of steel and rock.</li>
+          <li>Two or three passes, overlapping half the width. Alternate direction if the road is crowned, since a rigid 60" drag will shave the crown.</li>
+          <li>Work when the gravel is damp. Dry washboard is concrete; wet is soup.</li>
+          <li>Finish with a float-first pass from the rear lugs.</li>
+          <li>Nobody walks behind or beside the drag while it is moving. It throws stones.</li>
+          <li>Hose out the boxes after use, or they set up like mortar.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Hitch geometry</h3>
+        <div id="hitch-out"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="engineering">
+    <h2>Engineering notes</h2>
+    <div class="cols">
+      <div>
+        <p>All structural members are A36 3" x 3" x 1/4" angle (Sx about 0.58 in³). With 600 lb of ballast and a 2x factor for bouncing:</p>
+        <ul>
+          <li>Side rail as a 48" simply supported beam under half the load: M about 3,600 in·lb, stress about 6 ksi.</li>
+          <li>Blade as a 59" beam under a third of the load: about 4 ksi.</li>
+          <li>3/16" deck under a 300 lb log lying between blades on a 22.5" span: about 10 ksi.</li>
+          <li>A36 yields at 36 ksi. The 1/4" section is chosen for wear and for easy welding, not for strength.</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li>Towing: friction on gravel is about 0.7, so pull is 650 to 700 lb. 3/8" grade 70 chain (6,600 lb WLL) and 1/2" shackles (4,000 lb WLL) leave a wide margin for shock loads.</li>
+          <li>Lug: 3/8" plate, 3/4" hole with 1.6" edge distance. Bearing and tear-out capacity is about 30,000 lb, well above the chain's breaking strength, so the chain fails first.</li>
+          <li>Edge pressure on the two cutters at 900 lb total: about 7.5 lb per inch of edge. Four blades would halve that and cut worse.</li>
+          <li>Chain angle: with the hitch 20" up and 16 ft of chain the pull rises about 5°, lifting the front 60 lb. That helps it climb over a rock instead of stalling.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap muted">Built from a single spec file. Change the width above and every table and drawing recomputes. <a href="https://github.com/jgroom33/washboard">Source on GitHub</a>.</footer>
+
+<script type="module">
+import { buildSpec, verify, STEPS } from './js/spec.js';
+import { createViewer } from './js/viewer.js';
+import { renderDrawings } from './js/drawings.js';
+import { renderCutList, highlightRow, renderOrderList, renderWeights, renderHitch, renderSteps } from './js/tables.js';
+
+const $ = (s) => document.querySelector(s);
+const cutlistEl = $('#cutlist-out');
+const opts = { pricePerLb: 1.25, ballastLb: 600 };
+
+const viewer = createViewer($('#viewer'), {
+  onSelect(id) {
+    highlightRow(cutlistEl, id);
+    if (id) cutlistEl.querySelector('tr.selected')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  },
+});
+
+let spec;
+function renderOrder() {
+  renderOrderList($('#order-out'), spec, { pricePerLb: opts.pricePerLb, onPrice: (p) => { opts.pricePerLb = p; renderOrder(); } });
+}
+function rebuild() {
+  spec = buildSpec(parseInt($('#width').value, 10));
+  const errors = verify(spec);
+  const banner = $('#errors');
+  banner.hidden = errors.length === 0;
+  banner.textContent = errors.length ? 'Spec check failed: ' + errors.join('; ') : '';
+  viewer.build(spec);
+  renderDrawings($('#drawings-out'), spec);
+  renderCutList(cutlistEl, spec, { onSelect: (id) => viewer.select(id) });
+  renderOrder();
+  renderWeights($('#weights'), spec, opts.ballastLb);
+  renderHitch($('#hitch-out'), spec, opts.ballastLb);
+  renderSteps($('#steps-out'));
+  viewer.setExplode(parseFloat($('#explode').value));
+  viewer.setStep(parseInt($('#step').value, 10));
+  viewer.setBallast($('#ballast').value);
+}
+
+$('#width').addEventListener('change', rebuild);
+$('#explode').addEventListener('input', (e) => viewer.setExplode(parseFloat(e.target.value)));
+const stepLabel = $('#step-label');
+$('#step').addEventListener('input', (e) => { viewer.setStep(parseInt(e.target.value, 10)); stepLabel.textContent = STEPS[e.target.value - 1]; });
+$('#ballast').addEventListener('change', (e) => viewer.setBallast(e.target.value));
+$('#deck-opacity').addEventListener('input', (e) => viewer.setDeckOpacity(parseFloat(e.target.value)));
+$('#dims').addEventListener('change', (e) => viewer.setDims(e.target.checked));
+$('#ortho').addEventListener('change', (e) => viewer.setOrtho(e.target.checked));
+for (const b of document.querySelectorAll('.views button')) b.addEventListener('click', () => viewer.setView(b.dataset.view));
+// Initial state from the URL, e.g. ?width=48&explode=1&ballast=logs&step=3&view=top
+const q = new URLSearchParams(location.search);
+for (const k of ['width', 'explode', 'step', 'ballast']) if (q.has(k)) $('#' + k).value = q.get(k);
+stepLabel.textContent = STEPS[$('#step').value - 1];
+rebuild();
+if (q.has('view')) viewer.setView(q.get('view'));
+</script>
+</body>
+</html>
